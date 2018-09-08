@@ -21,7 +21,7 @@ function Square(props) {
     }
 
     createTable = () => {
-        for (let j = 0; j < 3; j++) {
+        for (let j = 0; j < 1; j++) {
             this.renderSquare(j);
             console.log('rendered: ' + j);
         }
@@ -107,8 +107,22 @@ function Square(props) {
         let status;
         if (winner) {
             status = 'Winner: ' + winner;
-        } else {
+        }
+        else {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+        } 
+        
+        let checkNull = 0;
+        for (let i = 0; i < 9; i++) {
+            if(!(current.squares[i] === null))
+            {
+                checkNull++;
+            }
+        }
+
+
+        if(checkNull === 9) {
+            status = 'Draw';
         }
 
         return (
