@@ -19,6 +19,13 @@ function Square(props) {
         />
       );
     }
+
+    createTable = () => {
+        for (let j = 0; j < 3; j++) {
+            this.renderSquare(j);
+            console.log('rendered: ' + j);
+        }
+    }
   
     render() {
         return (
@@ -87,7 +94,7 @@ function Square(props) {
 
         const moves = history.map((step, move) => {
             const desc = move ? 
-            'Go to move #' + move :
+            'Go to move #' + move + ' (col, row)':
             'Go to game start';
 
             return(
