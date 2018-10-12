@@ -15,7 +15,7 @@ function Square(props) {
       return (
         <Square
             value={this.props.squares[i]}
-            onClick={() => this.props.onClick(i)} 
+            onClick={() => this.props.onClick(i)}
         />
       );
     }
@@ -23,7 +23,7 @@ function Square(props) {
     createTable = () => {
         for (let j = 0; j < 1; j++) {
             this.renderSquare(j);
-            console.log('rendered: ' + j);
+            
         }
     }
   
@@ -113,6 +113,7 @@ function Square(props) {
         } 
         
         let checkNull = 0;
+        //Traverse squares array to check for filled square, if so, increment checkNull by 1
         for (let i = 0; i < 9; i++) {
             if(!(current.squares[i] === null))
             {
@@ -120,8 +121,8 @@ function Square(props) {
             }
         }
 
-
-        if(checkNull === 9) {
+        //if checkNull is 9, then entire grid filled and if there is no winner, it is a Draww
+        if(checkNull === 9 && !winner) {
             status = 'Draw';
         }
 
@@ -149,6 +150,15 @@ function Square(props) {
     document.getElementById('root')
   );
 
+  function renderStep(a) {
+      return (
+          <Square class="winner">
+              value={}
+              id="WinnerTiles"
+          </Square>
+      );
+  }
+
   //Function calculates the winner of the game
   function calculateWinner(squares) {    
       //Array of all possible winning outcomes
@@ -166,6 +176,8 @@ function Square(props) {
       for (let i = 0; i < lines.length; i++) {
           const [a, b, c] = lines[i];
           if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+              console.log('a: ' + a + ' b: ' + b + ' c: ' + c);
+              renderStep(a)
               return squares[a];
           }
       }
